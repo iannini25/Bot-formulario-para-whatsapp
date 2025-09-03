@@ -1,0 +1,25 @@
+# Dependências (pasta recriada pelo npm install)
+node_modules/
+
+# Sessão do WhatsApp (não expor sua conta!)
+.wwebjs_auth/
+
+# Arquivo de variáveis de ambiente (contém segredos)
+.env
+
+# Credenciais do Google (arquivo JSON baixado do console do Google Cloud)
+credenciais.json
+
+# Logs do Node/PM2
+*.log
+logs/
+pids/
+*.pid
+*.seed
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
