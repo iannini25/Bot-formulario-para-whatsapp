@@ -28,6 +28,9 @@ const sheets = google.sheets({ version: 'v4', auth });
 
 // === WhatsApp (forçando versão da web e Chrome instalado) ===
 // Se o Chrome estiver em outro caminho, ajuste `executablePath`
+const isLinux = process.platform === 'linux';
+const isWin   = process.platform === 'win32';
+
 const client = new Client({
   authStrategy: new LocalAuth({ clientId: 'bot1' }),
   webVersionCache: {
@@ -36,9 +39,11 @@ const client = new Client({
       'https://raw.githubusercontent.com/pedroslopez/whatsapp-web.js/main/web-version.json',
   },
   puppeteer: {
-    headless: false,
-    executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    headless: isLinux ? true : false,
+    executablePath: isLinux
+      ? '/usr/bin/chromium'
+      : 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
   },
   takeoverOnConflict: true,
   takeoverTimeoutMs: 10_000,
